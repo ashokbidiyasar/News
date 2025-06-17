@@ -13,13 +13,12 @@ const News = (props) => {
     return str?.charAt(0)?.toUpperCase() + str?.slice(1) || "";
   };
 
-
   const fetchNews = async () => {
     props.setProgress(10);
     setLoading(true);
 
     try {
-      const baseUrl =props.query
+      const baseUrl = props.query
         ? `https://newsapi.org/v2/everything?&q=${props.query}`
         : `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}`;
 
@@ -47,9 +46,7 @@ const News = (props) => {
     }
   };
 
-
   useEffect(() => {
-    
     setPage(1);
   }, [props.query, props.category]);
 
@@ -67,57 +64,50 @@ const News = (props) => {
   };
 
   return (
-    <div className="container mx-auto px-5 mt-20">
-      <h1 className="text-center text-3xl font-semibold my-6">
+    <div className="container mt-5 pt-4">
+      <h1 className="text-center display-5 mb-4">
         {props.query
           ? `Search Results for "${props.query}"`
           : `NewsMonkey - Top ${capitalize(props.category)} Headlines`}
       </h1>
 
       {loading && (
-        <div className="flex justify-center">
+        <div className="d-flex justify-content-center">
           <Spinner />
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-4">
+      <div className="row g-4 mx-2">
         {!loading && articles.length > 0
           ? articles.map((article) => (
-              <Newsitem
-                key={article.url}
-                title={article.title || ""}
-                desc={article.description || ""}
-                ImgUrl={article.urlToImage}
-                NewsUrl={article.url}
-                author={article.author || "Unknown"}
-                publishedAt={article.publishedAt || new Date().toGMTString()}
-              />
+              <div className="col-md-6 col-lg-4" key={article.url}>
+                <Newsitem
+                  title={article.title || ""}
+                  desc={article.description || ""}
+                  ImgUrl={article.urlToImage}
+                  NewsUrl={article.url}
+                  author={article.author || "Unknown"}
+                  publishedAt={article.publishedAt || new Date().toGMTString()}
+                />
+              </div>
             ))
-          : !loading && (
-              <p className="col-span-3 text-center">No articles found</p>
-            )}
+          : !loading && <p className="col-12 text-center">No articles found</p>}
       </div>
 
       {!loading && articles.length > 0 && (
-        <div className="flex justify-between mt-10 mb-6">
+        <div className="d-flex justify-content-between align-items-center mt-4 mb-4">
           <button
-            className={`bg-black text-white text-lg px-3 py-2 rounded-md ${
-              page <= 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-800"
-            }`}
+            className={`btn btn-dark ${page <= 1 ? "disabled" : ""}`}
             onClick={() => handlePageChange(page - 1)}
             disabled={page <= 1}
           >
             &larr; Previous
           </button>
-          <span className="self-center">
+          <span className="mx-3">
             Page {page} of {maxPage}
           </span>
           <button
-            className={`bg-black text-white text-lg px-3 py-2 rounded-md ${
-              page >= maxPage
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-gray-800"
-            }`}
+            className={`btn btn-dark ${page >= maxPage ? "disabled" : ""}`}
             onClick={() => handlePageChange(page + 1)}
             disabled={page >= maxPage}
           >
@@ -135,14 +125,14 @@ News.propTypes = {
   category: PropTypes.string,
   apiKey: PropTypes.string.isRequired,
   setProgress: PropTypes.func.isRequired,
-  query: PropTypes.string, 
+  query: PropTypes.string,
 };
 
 News.defaultProps = {
   pagesize: 20,
   country: "us",
   category: "business",
-  query: "", 
+  query: "",
 };
 
 export default News;

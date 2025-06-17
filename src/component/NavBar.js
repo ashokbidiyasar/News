@@ -1,4 +1,3 @@
-// import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -6,7 +5,6 @@ const NavBar = ({ onSearchSubmit }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     if (searchValue.trim()) {
       onSearchSubmit(searchValue);
@@ -14,106 +12,89 @@ const NavBar = ({ onSearchSubmit }) => {
     setSearchValue("");
   };
 
-  const handleOnChange = (e)=>{
-      setSearchValue(e.target.value);
-  }
+  const handleOnChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   return (
-    <div className="flex bg-black py-2 fixed-top justify-between items-center">
-      <ul className="flex text-lg text-white ml-8 space-x-7 py-2 items-center justify-center">
-        <div className="flex text-md space-x-3 items-center mr-5 justify-between items-center justify-center">
-          <span className="text-2xl font-semibold">NewsMonkey</span>
-          <li>
-            <i className="fa-regular fa-newspaper  text-white color-white mt-2 text-3xl"></i>
-          </li>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-black py-2 fixed-top">
+      <div className="container-fluid">
+        <div className="d-flex align-items-center me-5">
+          <span className="navbar-brand fs-3 fw-semibold">NewsMonkey</span>
+          <i className="fa-regular fa-newspaper text-white fs-3 mt-1"></i>
         </div>
 
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/general"
-          >
-            Home
-          </Link>
-        </li>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/business"
-          >
-            Business
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/entertainment"
-          >
-            Entertainment
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/general"
-          >
-            General
-          </Link>
-        </li>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto px-2">
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/general">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/business">
+                Business
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/entertainment">
+                Entertainment
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/general">
+                General
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/science">
+                Science
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/sports">
+                Sports
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/technology">
+                Technology
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link px-3 py-2" to="/health">
+                Health
+              </Link>
+            </li>
+          </ul>
 
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/science"
-          >
-            Science
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/sports"
-          >
-            Sports
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/technology"
-          >
-            Technology
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="hover:border hover:border-white px-1 py-2"
-            to="/health"
-          >
-            Health
-          </Link>
-        </li>
-      </ul>
-
-      <div className="flex ">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={handleOnChange}
-            className="text-black border border-white px-1 py-1 text-xl font-semibold rounded-md"
-            placeholder="Search here"
-          />
-          <button
-            type="submit" 
-            className="text-green-500 px-3 ml-1 mr-8 py-[3px] rounded-md font-semibold text-2xl hover:border hover:border-white"
-          >
-            Search
-          </button>
-        </form>
+          <form className="d-flex" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleOnChange}
+              className="form-control me-2"
+              placeholder="Search here"
+            />
+            <button type="submit" className="btn btn-outline-success">
+              Search
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
