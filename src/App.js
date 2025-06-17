@@ -9,6 +9,7 @@ import News from "./component/News";
 function App(props) {
   let page=20;
   const apiKey = process.env.REACT_APP_NEWS_API;
+  console.log("API Key:", process.env.REACT_APP_NEWS_API);
 
   const [progress, setProgress] = useState(0);
   const [query ,setquery] = useState('');
