@@ -1,4 +1,5 @@
 import "./App.css";
+
 import NavBar from "./component/NavBar";
 import { BrowserRouter as Router, Routes, Route ,useLocation} from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
