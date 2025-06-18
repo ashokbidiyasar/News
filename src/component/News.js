@@ -19,10 +19,10 @@ const News = (props) => {
 
     try {
       const baseUrl = props.query
-        ? `https://newsapi.org/v2/everything?&q=${props.query}`
-        : `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}`;
+        ? `https://gnews.io/api/v4/search?q=${props.query}`
+        : `https://gnews.io/api/v4/top-headlines?country=${props.country}&topic=${props.category}`;
 
-      const url = `${baseUrl}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pagesize}`;
+      const url = `${baseUrl}&apikey=${props.apiKey}&page=${page}`;
 
       const response = await fetch(url);
       props.setProgress(30);
@@ -84,7 +84,7 @@ const News = (props) => {
                 <Newsitem
                   title={article.title || ""}
                   desc={article.description || ""}
-                  ImgUrl={article.urlToImage}
+                  ImgUrl={article.image}
                   NewsUrl={article.url}
                   author={article.author || "Unknown"}
                   publishedAt={article.publishedAt || new Date().toGMTString()}
