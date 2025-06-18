@@ -20,9 +20,9 @@ const News = (props) => {
     try {
       const baseUrl = props.query
         ? `https://gnews.io/api/v4/search?q=${props.query}`
-        : `https://gnews.io/api/v4/top-headlines?country=${props.country}&topic=${props.category}`;
+        : `https://gnews.io/api/v4/top-headlines?country=${props.country}&topic=${props.category || "general"}`;
 
-      const url = `${baseUrl}&apikey=${props.apiKey}&page=${page}&max=10`;
+      const url = `${baseUrl}&apikey=${props.apiKey}&max=10`;
 
       const response = await fetch(url);
       props.setProgress(30);
